@@ -1,43 +1,51 @@
 import { StrictMode, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { ArrowDown, ArrowUpRight, CalendarDays, Camera, ChevronDown, Clock3, MapPin, Menu as MenuIcon, Phone, X } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, CalendarDays, Camera, ChevronDown, Clock3, MapPin, Menu as MenuIcon, X } from 'lucide-react';
 import heroImage from './assets/IMG_1601.JPG';
+import barSpiaggiaImage from './assets/bar-spiaggia.png';
+import colazioneBarImage from './assets/colazione-bar.png';
+import frittoGallinaraImage from './assets/fritto-gallinara.png';
+import frittoSpiaggiaImage from './assets/fritto-spiaggia.png';
+import piattiRistoranteImage from './assets/piatti-ristorante.png';
 import './styles.css';
 
 const menuItems = {
   Antipasti: [
-    ['Ostrica, mela verde e finocchio', '16'],
-    ['Polpo arrosto, patata affumicata', '18'],
-    ['Pane croccante, stracciatella e acciughe', '14'],
+    { name: 'CAPRESE', price: '8', description: 'Pomodoro "cuore di bue", mozzarella fiordilatte e basilico fresco.' },
+    { name: 'BRESAOLA, RUCOLA E GRANA', price: '12', description: 'Bresaola, rucola e Grana a scaglie, con olio e limone.' },
+    { name: 'PROSCIUTTO E MELONE', price: '12', description: 'Prosciutto crudo, melone di stagione e basilico fresco.' },
+    { name: 'BRANDACUJUN', price: '14', description: 'Merluzzo, patate, aglio, prezzemolo e olio EVO.' },
+    { name: 'CARPACCIO DI MARE', price: '18', description: 'Tonno, salmone, pesce spada, polpo, alici marinate, marlin e pomodorino ciliegino, con olio e limone.' },
+    { name: 'ACCIUGHE RIPIENE FRITTE', price: '15' },
+    { name: 'INSALATINA DI POLPO', price: '18', description: 'Polpo e patate con sedano, olive taggiasche, limone e prezzemolo.' },
   ],
-  Primi: [
-    ['Trofie mantecate, vongole e limone', '22'],
-    ['Spaghettone, pomodoro arrosto e basilico', '16'],
-    ['Raviolo di ricotta, gambero rosso e lime', '20'],
+  'Primi piatti': [
+    { name: 'PENNE AL POMODORO', price: '10', description: 'Penne al pomodoro con aglio, olio EVO e basilico fresco.' },
+    { name: 'TROFIE AL PESTO', price: '12', description: 'Trofie fresche al pesto alla genovese.' },
+    { name: 'PANSOTTI IN SALSA DI NOCI', price: '12', description: 'Pansotti ripieni di erbette e ricotta, con salsa di noci.' },
+    { name: 'SCIALATIELLI AL RAGÙ DI MARE', price: '16', description: 'Scialatielli freschi con cozze, vongole, calamari, totani e gamberi, con prezzemolo, aglio, olio EVO e vino bianco.' },
+    { name: 'TONNARELLO ALLE VONGOLE', price: '19', description: 'Tonnarello fresco con vongole, aglio, olio EVO, prezzemolo e vino.' },
   ],
-  Secondi: [
-    ['Pescato del giorno, verdure di stagione', '28'],
-    ['Ombrina alla brace, salsa al prezzemolo', '26'],
-    ['Melanzana arrosto, mandorla e cappero', '19'],
+  'Secondi piatti': [
+    { name: 'COTOLETTA E PATATINE', price: '12', description: 'Filettino di pollo con patatine fritte.' },
+    { name: 'POLPO CON PURÈ', price: '18', description: 'Polpo e purè di patate con olio al basilico.' },
+    { name: 'SPADELLATA DI TONNO', price: '18', description: 'Filetto di tonno con trombette, pomodorini e olive taggiasche, con olio EVO.' },
+    { name: 'FRITTO DI CALAMARI E GAMBERI', price: '20', description: 'Anelli e ciuffi di calamaro, con code di gambero.' },
+    { name: 'TAGLIATA, RUCOLA E GRANA', price: '20', description: '250gr di picanha con rucola, Grana a scaglie, olio EVO e fiocchi di sale.' },
   ],
-  Dessert: [
-    ['Canestrello ligure, miele e limone', '10'],
-    ['Millefoglie di ricotta e agrumi', '9'],
-    ['Cioccolato fondente, sale e olio nuovo', '10'],
-  ],
-  Cocktails: [
-    ['Basilico Spritz, basilico e prosecco', '12'],
-    ['Mediterranean Tonic, gin e rosmarino', '13'],
-    ['Ginger Sea, vodka, zenzero e lime', '12'],
+  Contorni: [
+    { name: 'PATATINE FRITTE', price: '6' },
+    { name: 'INSALATA MISTA', price: '7' },
+    { name: 'VERDURE GRIGLIATE', price: '8' },
   ],
 };
 
 const gallery = [
-  { src: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85', alt: 'Costa mediterranea e terrazza sul mare', className: 'gallery-tall' },
-  { src: 'https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=900&q=85', alt: 'Piatto mediterraneo con basilico', className: 'gallery-wide' },
-  { src: 'https://images.unsplash.com/photo-1608797178974-15b35a64ede9?auto=format&fit=crop&w=900&q=85', alt: 'Basilico fresco e ingredienti liguri', className: '' },
-  { src: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=900&q=85', alt: 'Olio extravergine di oliva', className: '' },
-  { src: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=900&q=85', alt: 'Piatto di pesce mediterraneo', className: '' },
+  { src: piattiRistoranteImage, alt: 'Piatti del ristorante', className: 'gallery-tall' },
+  { src: frittoSpiaggiaImage, alt: 'Cucina e spiaggia', className: '' },
+  { src: frittoGallinaraImage, alt: 'Cucina con vista sulla Gallinara', className: '' },
+  { src: colazioneBarImage, alt: 'Colazione al bar', className: '' },
+  { src: barSpiaggiaImage, alt: 'Bar sulla spiaggia', className: '' },
 ];
 
 function App() {
@@ -74,11 +82,11 @@ function App() {
       <main id="top">
         <section className="hero section-pad">
           <div className="hero-copy reveal">
-            <p className="eyebrow">Cucina mediterranea · Albenga, Liguria</p>
+            <p className="eyebrow">Bar · ristorante · spiaggia · Albenga</p>
             <h1>Chiosco<br /><i>Belvedere.</i></h1>
             <p className="hero-lead">Il gusto di stare bene.</p>
-            <p className="hero-text">Una tavola affacciata sul mare, con vista sull'Isola Gallinara, dove la cucina ligure incontra il Mediterraneo.</p>
-              <p className="hero-text">Nel cuore del Parco Vacanze Riviera, sul mare di Albenga.<br />Una cucina mediterranea da vivere con la Gallinara all’orizzonte.</p>
+            <p className="hero-text">Un luogo sul mare di Albenga per vivere il bar, il ristorante e la spiaggia con vista sull'Isola Gallinara.</p>
+              <p className="hero-text">Dal mattino alla sera, il Chiosco Belvedere accompagna colazione, pausa al mare, aperitivo, pranzo e cena.</p>
             <div className="hero-actions">
               <a className="button button-dark" href="#menu">Scopri il menu <ArrowDown size={16} /></a>
               <a className="text-link" href="#storia">Conosciamoci <ArrowUpRight size={15} /></a>
@@ -93,50 +101,50 @@ function App() {
           <div className="hero-scroll"><span>Scorri per entrare</span><ArrowDown size={15} /></div>
         </section>
 
-        <section className="marquee" aria-label="Specialità della casa">
-          <div>Basilico fresco <span>✦</span> Pesto genovese <span>✦</span> Olio ligure <span>✦</span> Vista su Isola Gallinara <span>✦</span> Basilico fresco <span>✦</span></div>
+        <section className="marquee" aria-label="Esperienza Chiosco Belvedere">
+          <div>A TAVOLA CON IL MARE DAVANTI <span>✦</span> UNA PAUSA DA VIVERE <span>✦</span> LA GALLINARA ALL'ORIZZONTE <span>✦</span> IL PIACERE DI STARE BENE <span>✦</span> MARE • RELAX • BUONA CUCINA <span>✦</span></div>
         </section>
 
         <section className="story section-pad" id="storia">
           <div className="section-label"><span>01</span><span>Chi siamo</span></div>
           <div className="story-grid">
             <div className="story-heading"><p className="eyebrow">La nostra filosofia</p><h2>Qui il mare<br />entra <i>in tavola.</i></h2></div>
-            <div className="story-body"><p>Una cucina semplice, mediterranea e legata al territorio. Scegliamo ingredienti di qualità e li trasformiamo in piatti che raccontano la Liguria, tra mare, basilico, pesto e olio extravergine. Il modo migliore per gustarli? Davanti al mare, con Isola Gallinara all'orizzonte.</p><a className="text-link" href="#contatti">Conosci il Belvedere <ArrowUpRight size={15} /></a></div>
+            <div className="story-body"><p>Bar, ristorante e spiaggia: il Chiosco Belvedere è un posto da vivere con il mare davanti e l'Isola Gallinara all'orizzonte.</p><a className="text-link" href="#contatti">Conosci il Belvedere <ArrowUpRight size={15} /></a></div>
           </div>
-          <div className="story-stats"><div><strong>Mare</strong><span>cucina mediterranea</span></div><div><strong>Pesto</strong><span>profumo di Liguria</span></div><div><strong>Olio</strong><span>extravergine italiano</span></div></div>
+          <div className="story-stats"><div><strong>Bar</strong><span>colazione e pausa</span></div><div><strong>Ristorante</strong><span>pranzo e cena</span></div><div><strong>Spiaggia</strong><span>mare e relax</span></div></div>
         </section>
 
           <section className="partner-section section-pad">
             <div className="section-label"><span>02</span><span>Il luogo</span></div>
             <div className="partner-grid">
               <div><p className="eyebrow">Parco Vacanze Riviera</p><h2>Una vacanza,<br /><i>un tavolo,</i><br />il mare.</h2></div>
-              <div className="partner-body"><p>Il Chiosco Belvedere fa parte del Parco Vacanze Riviera, direttamente sul mare di Albenga. Un luogo dove vacanza, mare e cucina si incontrano, con l’Isola Gallinara all’orizzonte.</p><a className="text-link" href="https://parcovacanzeriviera.it/" target="_blank" rel="noreferrer">Scopri il Parco Vacanze Riviera <ArrowUpRight size={15} /></a></div>
+              <div className="partner-body"><p>Il Chiosco Belvedere fa parte del Parco Vacanze Riviera, sul mare di Albenga, con l’Isola Gallinara all’orizzonte.</p><a className="text-link" href="https://parcovacanzeriviera.it/" target="_blank" rel="noreferrer">Scopri il Parco Vacanze Riviera <ArrowUpRight size={15} /></a></div>
             </div>
           </section>
 
         <section className="menu-section section-pad" id="menu">
             <div className="section-label light-label"><span>03</span><span>La carta</span></div>
-          <div className="menu-intro"><p className="eyebrow">Quello che amiamo cucinare</p><h2>Il menu segue<br /><i>la stagione.</i></h2><p>Una cucina sincera, fatta di ingredienti scelti e piatti che cambiano con il ritmo del mare.</p></div>
+          <div className="menu-intro"><p className="eyebrow">La carta del ristorante</p><h2>Piatti pensati<br /><i>per essere gustati senza fretta, con il mare davanti.</i></h2><p>La carta del Chiosco Belvedere, da vivere a tavola con il mare davanti.</p></div>
           <div className="menu-tabs" role="tablist" aria-label="Categorie menu">
             {Object.keys(menuItems).map((category) => <button className={activeCategory === category ? 'active' : ''} onClick={() => setActiveCategory(category)} role="tab" aria-selected={activeCategory === category} key={category}>{category}</button>)}
           </div>
-          <div className="menu-list">{menuItems[activeCategory].map(([name, price], index) => <div className="menu-item" key={name}><span className="dish-number">0{index + 1}</span><span className="dish-name">{name}</span><span className="dish-dots" /><span className="dish-price">€ {price}</span></div>)}</div>
+          <div className="menu-list">{menuItems[activeCategory].map(({ name, price, description }, index) => <div className="menu-item" key={name}><span className="dish-number">{String(index + 1).padStart(2, '0')}</span><div className="dish-details"><span className="dish-name">{name}</span>{description && <span className="dish-description">{description}</span>}</div><span className="dish-dots" /><span className="dish-price">€ {price}</span></div>)}</div>
           <a className="button button-light menu-download" href="#prenota">Prenota per assaggiare <ArrowUpRight size={16} /></a>
         </section>
 
         <section className="featured section-pad">
-          <div className="section-label"><span>03</span><span>Dalla cucina</span></div>
-          <div className="featured-heading"><h2>Il nostro<br /><i>preferito.</i></h2><p>Tre piatti, tre modi di raccontare la costa ligure. Quelli da cui iniziare, sempre.</p></div>
+          <div className="section-label"><span>03</span><span>Bar e ristorante</span></div>
+          <div className="featured-heading"><h2>Una giornata<br /><i>al Belvedere.</i></h2><p>Colazione, pausa al mare, aperitivo, pranzo e cena: bar, ristorante e spiaggia con vista sulla Gallinara.</p></div>
           <div className="dish-cards">
-            <article className="dish-card"><div className="dish-card-image"><img src="https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&w=900&q=85" alt="Trofie di mare con vongole" /><span>01</span></div><div className="dish-card-info"><div><h3>Trofie di mare</h3><p>Vongole, limone, basilico</p></div><strong>€ 22</strong></div></article>
-            <article className="dish-card offset-card"><div className="dish-card-image"><img src="https://images.unsplash.com/photo-1539136788836-5699e78bfc75?auto=format&fit=crop&w=900&q=85" alt="Pescato del giorno con verdure" /><span>02</span></div><div className="dish-card-info"><div><h3>Pescato del giorno</h3><p>Verdure, erbe selvatiche</p></div><strong>€ 28</strong></div></article>
-            <article className="dish-card"><div className="dish-card-image"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=900&q=85" alt="Dessert ligure" /><span>03</span></div><div className="dish-card-info"><div><h3>Canestrello ligure</h3><p>Miele, limone</p></div><strong>€ 10</strong></div></article>
+            <article className="dish-card"><div className="dish-card-image"><img src={piattiRistoranteImage} alt="Piatti del ristorante" /><span>01</span></div><div className="dish-card-info"><div><h3>Ristorante</h3><p>Buona cucina al mare</p></div></div></article>
+            <article className="dish-card offset-card"><div className="dish-card-image"><img src={frittoGallinaraImage} alt="Cucina con vista sulla Gallinara" /><span>02</span></div><div className="dish-card-info"><div><h3>Mare e cucina</h3><p>Con vista sulla Gallinara</p></div></div></article>
+            <article className="dish-card"><div className="dish-card-image"><img src={barSpiaggiaImage} alt="Bar e spiaggia" /><span>03</span></div><div className="dish-card-info"><div><h3>Bar e spiaggia</h3><p>Una pausa da vivere</p></div></div></article>
           </div>
         </section>
 
         <section className="gallery-section section-pad" id="galleria">
           <div className="section-label"><span>04</span><span>Galleria</span></div>
-          <div className="gallery-heading"><h2>Una tavola<br /><i>con vista.</i></h2><p>Il posto giusto per i pranzi lunghi, i tramonti lenti e le cose belle senza fretta.</p></div>
+          <div className="gallery-heading"><h2>Bar, ristorante<br /><i>e spiaggia.</i></h2><p>Immagini del Chiosco Belvedere, tra tavola, bar, mare e vista sulla Gallinara.</p></div>
           <div className="gallery-grid">{gallery.map((item) => <div className={`gallery-image ${item.className}`} key={item.src}><img src={item.src} alt={item.alt} /></div>)}</div>
         </section>
 
@@ -151,10 +159,10 @@ function App() {
           </form>
         </section>
 
-        <section className="contact section-pad" id="contatti"><div className="section-label"><span>06</span><span>Dove trovarci</span></div><div className="contact-grid"><div><p className="eyebrow">Vieni a trovarci</p><h2>Ci trovi<br /><i>qui.</i></h2></div><div className="contact-details"><div><MapPin size={18} /><p><strong>Chiosco Belvedere</strong><br />Via del Faro, 12<br />17031 Albenga, Liguria</p></div><div><Clock3 size={18} /><p><strong>Orari</strong><br />Mar — Dom · 12:30 — 00:00<br /><span>Lunedì chiuso</span></p></div><div><Phone size={18} /><p><strong>Parliamone</strong><br /><a href="tel:+390701234567">+39 070 123 4567</a><br /><a href="mailto:ciao@chioscobelvedere.it">ciao@chioscobelvedere.it</a></p></div></div></div></section>
+        <section className="contact section-pad" id="contatti"><div className="section-label"><span>06</span><span>Dove trovarci</span></div><div className="contact-grid"><div><p className="eyebrow">Vieni a trovarci</p><h2>Ci trovi<br /><i>qui.</i></h2></div><div className="contact-details"><div><MapPin size={18} /><p><strong>Chiosco Belvedere</strong><br />Via Luigi Einaudi 100<br />17031 Albenga (SV)</p></div><div><Clock3 size={18} /><p><strong>Orari</strong><br />Aperto tutti i giorni<br />08:00 — 23:00</p></div></div></div></section>
       </main>
 
-      <footer className="footer section-pad"><a className="brand footer-brand" href="#top"><span className="brand-mark">CB</span><span>Chiosco<br /><em>Belvedere</em></span></a><p>Una finestra sul Mediterraneo.</p><div className="footer-right"><div className="socials"><a href="https://instagram.com" aria-label="Instagram"><Camera size={18} /></a><a href="https://facebook.com" aria-label="Facebook">f</a><a href="mailto:ciao@chioscobelvedere.it" aria-label="Email">@</a></div><small>© 2025 Chiosco Belvedere</small></div></footer>
+      <footer className="footer section-pad"><a className="brand footer-brand" href="#top"><span className="brand-mark">CB</span><span>Chiosco<br /><em>Belvedere</em></span></a><p>Una finestra sul Mediterraneo.</p><div className="footer-right"><div className="socials"><a href="https://instagram.com" aria-label="Instagram"><Camera size={18} /></a><a href="https://facebook.com" aria-label="Facebook">f</a></div><small>Chiosco Belvedere</small></div></footer>
     </div>
   );
 }
